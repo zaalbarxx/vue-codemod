@@ -37,6 +37,7 @@ Inspired by [react-codemod](https://github.com/reactjs/react-codemod).
 
 ### Transformation List
 
+- `new-component-api`
 - `vue-class-component-v8`
 - `new-global-api`
 - `vue-router-v4`
@@ -69,6 +70,11 @@ Inspired by [react-codemod](https://github.com/reactjs/react-codemod).
 - `v-bind-order-sensitive`
 - `v-for-v-if-precedence-changed`
 - `remove-listeners`
+- `v-bind-sync`
+- `remove-v-on-native`
+- `router-link-event-tag`
+- `router-link-exact`
+- `router-view-keep-alive-transition`
 
 ### Migrating from Vue 2 to Vue 3
 
@@ -92,8 +98,6 @@ Legend of annotations:
 
 #### Fixable in ESLint
 
-- [RFC05: Replace `v-bind`'s `.sync` with a `v-model` argument](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0005-replace-v-bind-sync-with-v-model-argument.md)
-  - Can be detected and fixed by the [`vue/no-deprecated-v-bind-sync`](https://eslint.vuejs.org/rules/no-deprecated-v-bind-sync.html) ESLint rule
 - [RFC14: Remove `keyCode` support in `v-on`](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0014-drop-keycode-support.md)
   - Can be detected and fixed by the [`vue/no-deprecated-v-on-number-modifiers`](https://eslint.vuejs.org/rules/no-deprecated-v-on-number-modifiers.html) ESLint rule
   - `config.keyCode` can be supported in the compat build. It is also detectable with the [`vue/no-deprecated-vue-config-keycodes`](https://eslint.vuejs.org/rules/no-deprecated-vue-config-keycodes.html) ESLint rule
@@ -126,6 +130,13 @@ Legend of annotations:
          2. If there's exactly one entry file and one root instance, but several other files are also using `Vue.*`, then transform the entry file to export the root instance, import it in other files and transform them with the imported root instance;
          3. If there are more than one entry file or root instances, then the user needs to manually export the root instances, re-apply this codemod to those non-entry files with an argument designating the root instance.
   - 🔵 Detect and warn on `optionMergeStrategies` behavior change
+- [RFC04: Global API treeshaking](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0004-global-api-treeshaking.md)
+  - implemented as **`tree-shaking`**
+  - `Vue.nextTick()` -> `nextTick()`
+  - `Vue.observable()` -> `reactive()`
+  - `Vue.version` -> `version`
+- [RFC05: Replace `v-bind`'s `.sync` with a `v-model` argument](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0005-replace-v-bind-sync-with-v-model-argument.md)
+  - Can be detected and fixed by the [`vue/no-deprecated-v-bind-sync`](https://eslint.vuejs.org/rules/no-deprecated-v-bind-sync.html) ESLint rule
 - [RFC07: Functional and async components API change](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0007-functional-async-api-change.md)
   - 🔵 a compatibility mode can be provided for functional components for one-at-a-time migration
   - Can be detected by the [`vue/no-deprecated-functional-template`](https://eslint.vuejs.org/rules/no-deprecated-functional-template.html) ESLint rule
@@ -137,6 +148,10 @@ Legend of annotations:
     - 🔵 It's possible to provide a compat plugin that patches render functions and make them expose a 2.x compatible arguments, and can be turned off in each component for a one-at-a-time migration process.
     - 🔴 It's also possible to provide a codemod that auto-converts `h` calls to use the new VNode data format, since the mapping is pretty mechanical.
   - 🔴 Functional components using context will likely have to be manually migrated, but a similar adaptor can be provided.
+- [RFC09: Global mounting/configuration API change](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0009-global-api-change.md)
+  - `Vue.component` will be changed to `app.component` and it will be applied in the way of plugin, implemented as **`new-component-api`**
+  - `Vue.use` -> `createApp().use`
+  - 🔴 other api maybe need to be adjusted manually
 - [RFC12: Custom directive API change](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0012-custom-directive-api-change.md)
   - `bind` -> `beforeMount`
   - `inserted` -> `mounted`
@@ -199,8 +214,6 @@ Legend of annotations:
 
 > Note: there are just rough ideas. Amendments may or may not be proposed, depending on the implementation progress of this repo.
 
-- 🔵 [RFC04: Global API treeshaking](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0004-global-api-treeshaking.md) & [RFC09: Global mounting/configuration API change](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0009-global-api-change.md)
-  - `Vue.extend` can be supported in a compat runtime as an alias to `defineComponent`
 - 🔵 [RFC11: Component `v-model` API change](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0011-v-model-api-change.md)
   - I don't have a clear idea on how to progressively migrate the `v-model` API because both the author and consumer of the components need to change their ways to use this API, according to the current RFC. So we might need a compatibility layer in the runtime.
 
