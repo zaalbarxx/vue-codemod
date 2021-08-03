@@ -82,7 +82,7 @@ export function process(packageObj: any): any {
       }
     })
 
-  if (packageObj?.dependencies['element-ui'] != undefined) {
+  if (packageObj?.dependencies && packageObj?.dependencies['element-ui']) {
     delete packageObj.dependencies['element-ui']
     packageObj.dependencies['element-plus'] = '^1.0.2-beta.55'
   }
