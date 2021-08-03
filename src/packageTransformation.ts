@@ -60,6 +60,10 @@ export function transform(): boolean {
 
   let packageObj: JSON = fsExtra.readJsonSync(resolvedPaths[0])
 
+  if (JSON.stringify(packageObj) == JSON.stringify(process(packageObj))) {
+    return false
+  }
+
   packageObj = process(packageObj)
 
   fsExtra.writeJsonSync(resolvedPaths[0], packageObj, { spaces: 2 })

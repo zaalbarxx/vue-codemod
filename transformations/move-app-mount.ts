@@ -53,8 +53,8 @@ export const transformAST: ASTTransformation = ({ root, j }) => {
         )
       )
     )
+    cntFunc()
   }
-  cntFunc()
 }
 
 export default wrap(transformAST)
