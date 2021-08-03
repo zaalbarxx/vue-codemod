@@ -191,7 +191,7 @@ Examples:
 
 ### 典型迁移案例
 
-我们 forked 了 [vue2-element-touzi-admin](https://github.com/wdlhao/vue2-element-touzi-admin)，并尝试使用 `vue-codemod` 将该项目从 Vue 2 升级到 Vue 3，我们记录了升级过程中的每一步操作，如果您感兴趣，请参考[典型迁移案例](./docs/typical-case.md)。
+我们 fork 了 [vue2-element-touzi-admin](https://github.com/wdlhao/vue2-element-touzi-admin)，并尝试使用 `vue-codemod` 将该项目从 Vue 2 升级到 Vue 3，我们记录了升级过程中的每一步操作，如果您感兴趣，请参考[典型迁移案例](./docs/typical-case.md)。
 
 ## 规则清单
 
