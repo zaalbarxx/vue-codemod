@@ -16,9 +16,9 @@ export const transformAST: ASTTransformation = context => {
   if (rootNodes) {
     rootNodes.forEach((node: any) => {
       const path = filename
-      const name = 'remove * routes'
+      const name = 'Removed * routes'
       const suggest =
-        'Catch all routes (*, /*) must now be defined using a parameter with a custom regex: '
+        'Catch all routes (*, /*) must now be defined using a parameter with a custom regex.'
       const website =
         'https://next.router.vuejs.org/guide/migration/index.html#removal-of-the-fallback-option'
       pushManualList(path, node, name, suggest, website)

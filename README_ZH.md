@@ -1,6 +1,6 @@
 # vue-codemod
 
-> ⚠️注意: 该仓库 fork 自 [https://github.com/vuejs/vue-codemod](https://github.com/vuejs/vue-codemod)
+> ⚠️ 注意: 该仓库 fork 自 [https://github.com/vuejs/vue-codemod](https://github.com/vuejs/vue-codemod)
 
 `vue-codemod` 是一个 `Vue2` 升级 `Vue3` 的语法转换工具，能将绝大多数 `Vue2` 语法直接升级成 `Vue3` 语法，然后通过少量的手动修改完成 `Vue2` 到 `Vue3` 的平滑迁移。
 
@@ -35,7 +35,7 @@
 
 #### `npm/yarn` 方式
 
-``` bash
+```bash
 npm install @originjs/vue-codemod -g
 //or
 yarn global add @originjs/vue-codemod
@@ -73,7 +73,7 @@ yarn global add .
 
 `vue-codemod` 是由一条条转换规则组成，这些转换规则位于 `transformation/index.ts` 和 `vue-transformation/index.ts` 下。
 
-``` bash
+```bash
 npx vue-codemod <path> -t/-a [transformation params][...additional options]
 ```
 
@@ -82,7 +82,7 @@ npx vue-codemod <path> -t/-a [transformation params][...additional options]
 
 #### 执行所有规则
 
-``` bash
+```bash
 npx vue-codemod src -a
 ```
 
@@ -137,7 +137,7 @@ npx vue-codemod src -a -f log
 
 #### 手动迁移指导
 
-在`vue-codemod`的运行过程中，会识别到需要手动修改的部分，并以对象的形式打印到控制台（如果有`-f log`命令，则会输出到log文件中），样例如下：
+在`vue-codemod`的运行过程中，会识别到需要手动修改的部分，并以对象的形式打印到控制台（如果有`-f log`命令，则会输出到 log 文件中），样例如下：
 
 ```null
 The list that you need to migrate your codes mannually:
@@ -159,7 +159,7 @@ npx vue-codemod --help
 
 结果如下所示
 
-``` bash
+```bash
 npx vue-codemod --help
 Usage: vue-codemod [file pattern]
 

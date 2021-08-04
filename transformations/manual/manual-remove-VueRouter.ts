@@ -11,9 +11,9 @@ export const transformAST: ASTTransformation = context => {
   if (rootNodes) {
     rootNodes.forEach((node: any) => {
       const path = filename
-      const name = 'remove VueRouter'
+      const name = 'Removed VueRouter'
       const suggest =
-        "The rule of thumb is any APIs that globally mutate VueRouter's behavior are now moved to the app instance. "
+        "The rule of thumb is any APIs that globally mutate VueRouter's behavior are now moved to the app instance."
       const website =
         'https://next.router.vuejs.org/guide/migration/index.html#moved-the-base-option'
       pushManualList(path, node, name, suggest, website)

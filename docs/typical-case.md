@@ -11,7 +11,7 @@ Demo project address：[vue2-element-touzi-admin](https://github.com/originjs/vu
 ## Global Install `vue-codemod`
 
 ```bash
-npm install originjs/vue-codemod -g` 
+npm install originjs/vue-codemod -g`
 // or
 yarn add originjs/vue-codemod -g
 ```
@@ -106,7 +106,7 @@ Processed 49 files
 79 places need to be transformed
 71 places was transformed
 The transformation rate is 89.87%
-The transformation stats: 
+The transformation stats:
 
 ╔═══════════════════════════════════╤═══════╗
 ║ Rule Names                        │ Count ║
@@ -198,7 +198,7 @@ index: 8
 
 ### Step 2：[Upgrade elment-ui to element-plus](https://github.com/originjs/vue2-element-touzi-admin/commit/8cddf35dcf04165fbf997e378205c5428dcb5e7f)
 
-The biggest limitation of Vue 3 migration is the dependencies. If some components in your source code don't support Vue 3, we suggest your project remain unchanged until the Vue 3 supported version release. 
+The biggest limitation of Vue 3 migration is the dependencies. If some components in your source code don't support Vue 3, we suggest your project remain unchanged until the Vue 3 supported version release.
 
 ### Step 3：[Fix errors or warnings from Global API](https://github.com/originjs/vue2-element-touzi-admin/commit/c1a7288299f80e23d5b1ad32f111ee10564ad8bd)
 

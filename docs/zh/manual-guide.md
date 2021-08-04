@@ -13,11 +13,10 @@
     - [分隔符](#分隔符)
   - [Vue Router](#vue-router)
     - [VueRouter.prototype](#vuerouterprototype)
-    - [path 中的通配符 *](#path-中的通配符-)
+    - [path 中的通配符 \*](#path-中的通配符-)
     - [Router 4 所有的导航都是异步的](#router-4-所有的导航都是异步的)
   - [Element-ui](#element-ui)
-    - [升级依赖](#升级依赖)
-    - [依赖替换](#依赖替换)
+    - [样式引入](#样式引入)
     - [表格 el-table 作用域插槽](#表格-el-table-作用域插槽)
 
 <!-- /TOC -->
@@ -50,7 +49,7 @@ dependency 中有不支持 Vue 3 的库，暂时无法实现升级，需要选�
 
 ### 全局 API
 
- [官方迁移指导](https://v3.cn.vuejs.org/guide/migration/global-api.html)
+[官方迁移指导](https://v3.cn.vuejs.org/guide/migration/global-api.html)
 
 - 使用**插件**的方式对`全局 API` 进行转换
 
@@ -60,22 +59,22 @@ dependency 中有不支持 Vue 3 的库，暂时无法实现升级，需要选�
 
     ```js
     // directive/index.js
-    import Vue from "vue";
-    import myDirective from "@/directive/myDirective";
+    import Vue from 'vue'
+    import myDirective from '@/directive/myDirective'
 
-    Vue.directive('myDirective', myDirective) ;
+    Vue.directive('myDirective', myDirective)
     ```
 
     Vue 3 中：
 
     ```js
     // directive/index.js
-    import myDirective from "@/directive/myDirective";
+    import myDirective from '@/directive/myDirective'
 
-    export default{
-        install: app => {
-            app.directive('myDirective', myDirective) ;
-        }
+    export default {
+      install: app => {
+        app.directive('myDirective', myDirective)
+      }
     }
     ```
 
@@ -84,8 +83,8 @@ dependency 中有不支持 Vue 3 的库，暂时无法实现升级，需要选�
     ```js
     // main.js
     import MyDirective from '@/directive'
-  
-    Vue.createApp(App).use( myDirective)
+
+    Vue.createApp(App).use(myDirective)
     ```
 
 - 使用 `window.app=app` 的方式对`全局配置`进行转换
@@ -95,7 +94,7 @@ dependency 中有不支持 Vue 3 的库，暂时无法实现升级，需要选�
     ```js
     // main.js
     const app = Vue.createApp(App)
-    window.app = app  // 配置全局 app 实例
+    window.app = app // 配置全局 app 实例
     app.mount('#app')
     ```
 
@@ -133,7 +132,7 @@ dependency 中有不支持 Vue 3 的库，暂时无法实现升级，需要选�
 
 `slot` 属性的语法在 Vue 2.6.0 版本开始被废弃了，需要使用 `v-slot` 指令来支持具名插槽。转换工具的 `slot-attribute` 规则会将 `slot` 属性转换为 `v-slot` 指令的用法：
 
-```vue
+```html
 <base-layout>
   <p slot="content">2.5 slot attribute in slot</p>
 </base-layout>
@@ -141,24 +140,24 @@ dependency 中有不支持 Vue 3 的库，暂时无法实现升级，需要选�
 
 会被转换为：
 
-```vue
+```html
 <base-layout>
   <template v-slot:content>
-    <p >2.5 slot attribute in slot</p>
+    <p>2.5 slot attribute in slot</p>
   </template>
 </base-layout>
 ```
 
 对于同时使用了 `v-if` 与 `v-else` 指定的具名插槽来说，工具的转换则会产生错误：
 
-```vue
+```html
 <el-button v-if="showCronBox" slot="append" @click="showBox = false"></el-button>
 <el-button v-else="showCronBox" slot="append" @click="showBox = true"></el-button>
 ```
 
 将会被转换为：
 
-```vue
+```html
 <template v-slot:append>
   <el-button v-if="showCronBox" @click="showBox = false"></el-button>
 </template>
@@ -169,7 +168,7 @@ dependency 中有不支持 Vue 3 的库，暂时无法实现升级，需要选�
 
 由于 `v-if` 与 `v-else` 被分隔到两个 `<template>` 中，将会编译报错找不到 `v-if`，需要将 `v-if` 与 `v-else` 放到同一个 `<template>` 标签范围内：
 
-```vue
+```html
 <template v-slot:append> 
   <el-button v-if="showCronBox" @click="showBox = false"></el-button>
   <el-button v-else="showCronBox" slot="append" @click="showBox = true"></el-button>
@@ -193,7 +192,7 @@ dependency 中有不支持 Vue 3 的库，暂时无法实现升级，需要选�
 详情见[官方迁移指导](https://v3.cn.vuejs.org/guide/migration/events-api.html)
 
 - 添加 `mitt` 依赖
-  
+
   ```bash
   yarn add mitt
   // or
@@ -219,7 +218,7 @@ dependency 中有不支持 Vue 3 的库，暂时无法实现升级，需要选�
   ```js
   // main.js
   import bus from '@/bus'
-  
+
   const app = createApp(App).mount('#app')
   app.config.globalProperties.$bus = bus
   ```
@@ -227,14 +226,14 @@ dependency 中有不支持 Vue 3 的库，暂时无法实现升级，需要选�
 ### /deep/样式
 
 - `>>>` 和 `/deep/` 已经不支持了
-- `/deep/ .el-input {}` 更改为 `:deep(.el-input) {}` 
+- `/deep/ .el-input {}` 更改为 `:deep(.el-input) {}`
 - `v-deep:: .bar {}` 更改为 `::v-deep(.bar) {}`
 
 ### 分隔符
 
 Vue 2 中事件内部语句可以通过`换行符`作为分隔符：
 
-```vue
+```html
 <button @click="
   item.value = ''
   clearTag()
@@ -244,7 +243,7 @@ Vue 2 中事件内部语句可以通过`换行符`作为分隔符：
 
 但是在 Vue 3 中，需要添加 `;` 或者 `,` 作为分隔符：
 
-```vue
+```html
 <button @click="
   item.value = '';
   clearTag()
@@ -301,7 +300,7 @@ router.push = function (location, onResolve, onReject) {
 }
 ```
 
-### path 中的通配符 *
+### path 中的通配符 \*
 
 > 详情见：[官方迁移指导](https://next.router.vuejs.org/zh/guide/migration/index.html#删除了-（星标或通配符）路由)
 
@@ -373,7 +372,6 @@ watch: {
           this.$bus.$emit('filterSearch', param)
         })
       }
-   
     }
   }
 }
@@ -381,37 +379,27 @@ watch: {
 
 ## Element-ui
 
-目前 [Element UI](https://github.com/ElemeFE/element) 提供了适配 Vue 3 的组件库 [Element Plus](https://github.com/element-plus/element-plus)，涉及 `Element` 的部分需要手动升级。
+目前 [Element UI](https://github.com/ElemeFE/element) 提供了适配 Vue 3 的组件库 [Element Plus](https://github.com/element-plus/element-plus)，`vue-codemod` 完成了依赖升级与依赖替换等大部分的升级场景，但是 `Element-Plus` 仍然处于 beta 测试中，部分功能可能不稳定，需要开发者手动升级。
 
-### 升级依赖
+### 样式引入
 
-```bash
-npm install element-plus
-npm remove element-ui
-```
-
-### 依赖替换
-
-> 转换规则开发中
-
-- import 中的 `source` 改变了，可以通过 IDE 进行全局替换：`import xx from 'element-ui'` -> `import xx from 'element-plus'`
-- 部分组件名改变了，需要逐个手动识别：`import { Message } from 'element-ui'` -> `import { ElMessage } from 'element-plus'`
+部分全局样式的引入需要手动替换路径：`import('element-ui/lib/theme-chalk/index.css')` 替换为 `import('element-plus/lib/theme-chalk/index.css')`
 
 ### 表格 el-table 作用域插槽
 
 必须使用 `<template>` 配合 slot 的形式，例如：
 
-```vue
+```html
 <el-table>
-  <span slot-scope='scope'>{{ scope.row.num }}</span>
+  <span slot-scope="scope">{{ scope.row.num }}</span>
 </el-table>
 ```
 
 需要切换成：
 
-```vue
+```html
 <el-table>
-  <template #default='scope'>
+  <template #default="scope">
     <span>{{ scope.row.num }}</span>
   </template>
 </el-table>

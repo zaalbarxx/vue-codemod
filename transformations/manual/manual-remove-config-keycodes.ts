@@ -21,8 +21,9 @@ export const transformAST: ASTTransformation = context => {
   if (rootNodes) {
     rootNodes.forEach((node: any) => {
       const path = filename
-      const name = 'remove keycodes'
-      const suggest = 'config.keyCodes is no longer supported '
+      const name = 'Removed keyCodes modifiers'
+      const suggest =
+        'For those using keyCode in their codebase, we recommend converting them to their kebab-cased named equivalents.'
       const website =
         'https://v3.vuejs.org/guide/migration/keycode-modifiers.html'
       pushManualList(path, node, name, suggest, website)

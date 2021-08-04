@@ -16,9 +16,9 @@ export const transformAST: ASTTransformation = context => {
   if (rootNodes) {
     rootNodes.forEach((node: any) => {
       const path = filename
-      const name = 'remove $on $once and $off'
+      const name = 'Removed $on, $once and $off instance method'
       const suggest =
-        '$on, $off and $once instance methods are removed. Component instances no longer implement the event emitter interface. '
+        '$on, $off and $once instance methods are removed. Component instances no longer implement the event emitter interface.'
       const website =
         'https://v3.vuejs.org/guide/migration/events-api.html#overview'
       pushManualList(path, node, name, suggest, website)

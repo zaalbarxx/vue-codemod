@@ -1,24 +1,23 @@
-- [Manual Migration Guide](#Manual-Migration-Guide)
-  - [Limitation](#Limitation)
-    - [Vue version](#Vue-version)
-    - [Third-party dependencies](#Third-party-dependencies)
+- [Manual Migration Guide](#manual-migration-guide)
+  - [Limitation](#limitation)
+    - [Vue version](#vue-version)
+    - [Third-party dependencies](#third-party-dependencies)
   - [Vue](#vue)
-    - [Global API](#Global-API)
-    - [Slot](#Slot)
-    - [Filter](#Filter)
-      - [Partial Filter](#Partial-Filter)
-      - [Global Filter](#Global-Filter)
-    - [Events API](#Events-api)
+    - [Global API](#global-api)
+    - [Slot](#slot)
+    - [Filter](#filter)
+      - [Partial Filter](#partial-filter)
+      - [Global Filter](#global-filter)
+    - [Events API](#events-api)
     - [/deep/](#deep)
-    - [Delimiter](#Delimiter)
+    - [Delimiter](#delimiter)
   - [Vue Router](#vue-router)
     - [VueRouter.prototype](#vuerouterprototype)
-    - [Removed `*` routes](#Removed-`*`-routes)
-    - [All navigations in Router 4 are asynchronous](#All-navigations-in-Router-4-are-asynchronous)
+    - [Removed `*` routes](#removed--routes)
+    - [All navigations in Router 4 are asynchronous](#all-navigations-in-router-4-are-asynchronous)
   - [Element-ui](#element-ui)
-    - [Upgrade Dependencies](#Upgrade-Dependencies)
-    - [Import Modules](#Import-Modules)
-    - [`slot` attribute in el-table](#`slot`-attribute-in-el-table)
+    - [Import CSS](#import-css)
+    - [`slot` attribute in el-table](#slot-attribute-in-el-table)
 
 <!-- /TOC -->
 
@@ -38,7 +37,7 @@ Vue version >= 2.6.0
 
 Some third-party packages currently don't have support for Vue 3
 
-Currently, the UI framework libraries that support Vue 3 are: 
+Currently, the UI framework libraries that support Vue 3 are:
 
 - [quasar](https://github.com/quasarframework/quasar)
 - [element-plus](https://github.com/element-plus/element-plus/)
@@ -50,7 +49,7 @@ Please refer to [Vue2ToVue3](https://github.com/zdravkov/Vue2ToVue3) to see the 
 
 ### Global API
 
- [Migration Guide from Vue.js team](https://v3.vuejs.org/guide/migration/global-api.html)
+[Migration Guide from Vue.js team](https://v3.vuejs.org/guide/migration/global-api.html)
 
 - Transform `Global API` to a plugin
 
@@ -60,22 +59,22 @@ Please refer to [Vue2ToVue3](https://github.com/zdravkov/Vue2ToVue3) to see the 
 
     ```js
     // directive/index.js
-    import Vue from "vue";
-    import myDirective from "@/directive/myDirective";
+    import Vue from 'vue'
+    import myDirective from '@/directive/myDirective'
 
-    Vue.directive('myDirective', myDirective) ;
+    Vue.directive('myDirective', myDirective)
     ```
 
     In Vue 3:
 
     ```js
     // directive/index.js
-    import myDirective from "@/directive/myDirective";
+    import myDirective from '@/directive/myDirective'
 
-    export default{
-        install: app => {
-            app.directive('myDirective', myDirective) ;
-        }
+    export default {
+      install: app => {
+        app.directive('myDirective', myDirective)
+      }
     }
     ```
 
@@ -84,18 +83,18 @@ Please refer to [Vue2ToVue3](https://github.com/zdravkov/Vue2ToVue3) to see the 
     ```js
     // main.js
     import MyDirective from '@/directive'
-    
+
     Vue.createApp(App).use(myDirective)
     ```
 
-- Transform `Global Configuration` by  `window.app=app` 
+- Transform `Global Configuration` by `window.app=app`
 
-  - Configure the global app instance in `main.js` 
+  - Configure the global app instance in `main.js`
 
     ```js
     // main.js
     const app = Vue.createApp(App)
-    window.app = app  // Configure the global app instance
+    window.app = app // Configure the global app instance
     app.mount('#app')
     ```
 
@@ -131,17 +130,17 @@ Please refer to [Vue2ToVue3](https://github.com/zdravkov/Vue2ToVue3) to see the 
 
 Please refer to [Migration Guide from Vue.js team](https://vuejs.org/v2/guide/components-slots.html#Deprecated-Syntax) for more details.
 
-`slot` attributes are deprecated since Vue 2.6.0. `v-slot` was introduced for named  and scoped slots. In `vue-codemod` , the `slot-attribute` rule can transform `slot` attributes to  `v-slot` syntax：	
+`slot` attributes are deprecated since Vue 2.6.0. `v-slot` was introduced for named and scoped slots. In `vue-codemod` , the `slot-attribute` rule can transform `slot` attributes to `v-slot` syntax：
 
-```vue
+```html
 <base-layout>
   <p slot="content">2.5 slot attribute in slot</p>
 </base-layout>
 ```
 
-will be transformed to: 
+will be transformed to:
 
-```vue
+```html
 <base-layout>
   <template v-slot:content>
     <p >2.5 slot attribute in slot</p>
@@ -151,14 +150,14 @@ will be transformed to:
 
 For those named slots that use `v-if` and `v-else` together, `vue-codemod` will return an error.
 
-```vue
+```html
 <el-button v-if="showCronBox" slot="append" @click="showBox = false"></el-button>
 <el-button v-else="showCronBox" slot="append" @click="showBox = true"></el-button>
 ```
 
-will be transformed to: 
+will be transformed to:
 
-```vue
+```html
 <template v-slot:append>
   <el-button v-if="showCronBox" @click="showBox = false"></el-button>
 </template>
@@ -167,7 +166,7 @@ will be transformed to:
 </template>
 ```
 
-Since `v-if` and `v-else` will be divided into two `<template>`, it will return an error: 
+Since `v-if` and `v-else` will be divided into two `<template>`, it will return an error:
 
 ```powershell
 v-else used on element <el-button> without corresponding v-if.
@@ -175,8 +174,8 @@ v-else used on element <el-button> without corresponding v-if.
 
 We need to manually put `v-if` and `v-else` into one `<template>` tag.
 
-```vue
-<template v-slot:append> 
+```html
+<template v-slot:append>
   <el-button v-if="showCronBox" @click="showBox = false"></el-button>
   <el-button v-else="showCronBox" slot="append" @click="showBox = true"></el-button>
 </template>
@@ -198,8 +197,8 @@ In Vue 3, `$on`, `$off` and `$once` instance methods are removed. Component inst
 
 Please refer to [Migration Guide from Vue.js team](https://v3.vuejs.org/guide/migration/events-api.html) for more details.
 
-- Add  `mitt` dependencies
-  
+- Add `mitt` dependencies
+
   ```bash
   yarn add mitt
   // or
@@ -225,7 +224,7 @@ Please refer to [Migration Guide from Vue.js team](https://v3.vuejs.org/guide/mi
   ```js
   // main.js
   import bus from '@/bus'
-  
+
   const app = createApp(App).mount('#app')
   app.config.globalProperties.$bus = bus
   ```
@@ -233,14 +232,14 @@ Please refer to [Migration Guide from Vue.js team](https://v3.vuejs.org/guide/mi
 ### /deep/
 
 - `>>>` and `/deep/` are not supported
-- `/deep/ .el-input {}` should be transformed to `:deep(.el-input) {}` 
+- `/deep/ .el-input {}` should be transformed to `:deep(.el-input) {}`
 - `v-deep:: .bar {}` should be transformed to `::v-deep(.bar) {}`
 
 ### Delimiter
 
 In Vue 2, event internal statement can use `newline character` as the delimiter.
 
-```vue
+```html
 <button @click="
   item.value = ''
   clearTag()
@@ -250,7 +249,7 @@ In Vue 2, event internal statement can use `newline character` as the delimiter.
 
 But in Vue 3, `newline character` is no longer used as the delimiter. A `;` or `,` is needed.
 
-```vue
+```html
 <button @click="
   item.value = '';
   clearTag()
@@ -339,7 +338,7 @@ const asyncRoutes = [
 
 ### All navigations in Router 4 are asynchronous
 
-It may caused some render failure for components. For example, the following `RuleFilter.vue` component: 
+It may caused some render failure for components. For example, the following `RuleFilter.vue` component:
 
 ```js
 watch: {
@@ -365,7 +364,7 @@ mounted() {
 }
 ```
 
-So you may need to wait for the router to be *ready* before trigger `filterSearch`:
+So you may need to wait for the router to be _ready_ before trigger `filterSearch`:
 
 ```js
 watch: {
@@ -379,7 +378,6 @@ watch: {
           this.$bus.$emit('filterSearch', param)
         })
       }
-   
     }
   }
 }
@@ -387,27 +385,17 @@ watch: {
 
 ## Element-ui
 
-Currently, [Element UI](https://github.com/ElemeFE/element) provides a Vue3-supported libraries [Element Plus](https://github.com/element-plus/element-plus). The code related to `Element` needs to upgrade manuallly.
+Currently, [Element UI](https://github.com/ElemeFE/element) provides a Vue3-supported libraries [Element Plus](https://github.com/element-plus/element-plus). `vue-codemod` has completed most of the upgrade scenarios such as dependency upgrade and dependency replacement, but `Element-Plus` is still in beta testing, some functions may be unstable, and developers need to upgrade manually.
 
-### Upgrade dependencies
+### Import CSS
 
-```bash
-npm install element-plus
-npm remove element-ui
-```
-
-### Import modules
-
-> We are developing auto transformation for element-ui import.
-
-- The import source has changed. Users can replace it globally in IDE: `import xx from 'element-ui'` -> `import xx from 'element-plus'`
-- Some components' name has changed. Users need to upgrade manually: `import { Message } from 'element-ui'` -> `import { ElMessage } from 'element-plus'`
+Part of global CSS should be imported from `element-plus`: `import('element-ui/lib/theme-chalk/index.css')` should be replaced with `import('element-plus/lib/theme-chalk/index.css')`
 
 ### `slot` attribute in el-table
 
-Must use `<template>` to wrap the `slot`. For example: 
+Must use `<template>` to wrap the `slot`. For example:
 
-```vue
+```html
 <el-table>
   <span slot-scope='scope'>{{ scope.row.num }}</span>
 </el-table>
@@ -415,7 +403,7 @@ Must use `<template>` to wrap the `slot`. For example:
 
 Need to be transformed to:
 
-```vue
+```html
 <el-table>
   <template #default='scope'>
     <span>{{ scope.row.num }}</span>

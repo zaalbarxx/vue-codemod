@@ -39,9 +39,9 @@ function findNodes(context: any) {
 
   toFixNodes.forEach(node => {
     const path = file.path
-    const name = 'remove keycode'
+    const name = 'Removed keyCodes modifiers'
     const suggest =
-      'Using numbers, i.e. keyCodes, as v-on modifiers is no longer supported'
+      'For those using keyCode in their codebase, we recommend converting them to their kebab-cased named equivalents.'
     const website =
       'https://v3.vuejs.org/guide/migration/keycode-modifiers.html'
     VuePushManualList(path, node, name, suggest, website)

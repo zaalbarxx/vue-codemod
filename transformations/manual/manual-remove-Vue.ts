@@ -15,9 +15,9 @@ export const transformAST: ASTTransformation = context => {
   if (rootNodes) {
     rootNodes.forEach((node: any) => {
       const path = filename
-      const name = 'remove Vue(global api)'
+      const name = 'Global Vue API is changed to use an application instance'
       const suggest =
-        "The rule of thumb is any APIs that globally mutate Vue's behavior are now moved to the app instance. "
+        "The rule of thumb is any APIs that globally mutate Vue's behavior are now moved to the app instance."
       const website =
         'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
       pushManualList(path, node, name, suggest, website)

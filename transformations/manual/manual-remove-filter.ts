@@ -13,9 +13,9 @@ export const transformAST: ASTTransformation = context => {
   if (rootNodes) {
     rootNodes.forEach((node: any) => {
       const path = filename
-      const name = 'remove filters'
+      const name = 'Removed Filters'
       const suggest =
-        'Filters are removed from Vue 3.0 and no longer supported. '
+        'Filters are removed from Vue 3.0 and no longer supported.'
       const website =
         'https://v3.vuejs.org/guide/migration/filters.html#overview'
       pushManualList(path, node, name, suggest, website)
