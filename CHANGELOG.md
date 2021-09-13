@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.1.0-beta.2](https://github.com/originjs/vue-codemod/compare/v1.1.0-beta.1...v1.1.0-beta.2) (2021-09-13)]
+
+* Fix comment out of template, script and style ([#110](https://github.com/originjs/vue-codemod/pull/110))
+
 ## [1.1.0-beta.1](https://github.com/originjs/vue-codemod/compare/v1.1.0-beta.0...v1.1.0-beta.1) (2021-08-05)
 
 * Optimize layout of statistics report ([fab7e50](https://github.com/originjs/vue-codemod/commit/fab7e506831886c5facae4e26fc9feb65a09900d))
