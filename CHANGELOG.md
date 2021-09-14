@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.1.0-beta.3](https://github.com/originjs/vue-codemod/compare/v1.1.0-beta.2...v1.1.0-beta.3) (2021-09-13)]
+
+* Fix: don't remove script setup block ([#112](https://github.com/originjs/vue-codemod/pull/112))
+
 ## [1.1.0-beta.2](https://github.com/originjs/vue-codemod/compare/v1.1.0-beta.1...v1.1.0-beta.2) (2021-09-13)]
 
 * Fix comment out of template, script and style ([#110](https://github.com/originjs/vue-codemod/pull/110))
