@@ -2,6 +2,10 @@
 
 ## [1.1.0](https://github.com/originjs/vue-codemod/compare/v1.1.0-beta.3...v1.1.0) (2021-12-13)]
 
+* Fix: change line terminator of dist files from CRLF to LF
+
+## [1.1.0](https://github.com/originjs/vue-codemod/compare/v1.1.0-beta.3...v1.1.0) (2021-12-13)]
+
 ## [1.1.0-beta.3](https://github.com/originjs/vue-codemod/compare/v1.1.0-beta.2...v1.1.0-beta.3) (2021-09-13)]
 
 * Fix: don't remove script setup block ([#112](https://github.com/originjs/vue-codemod/pull/112))
