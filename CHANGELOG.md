@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.1.0](https://github.com/originjs/vue-codemod/compare/v1.1.0-beta.3...v1.1.0) (2021-12-13)]
+## [1.1.1](https://github.com/originjs/vue-codemod/compare/v1.1.0...v1.1.1) (2021-12-15)]
 
 * Fix: change line terminator of dist files from CRLF to LF
 
