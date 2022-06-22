@@ -136,7 +136,7 @@ index: 1
   position: '[7,0]',
   name: 'remove Vue(global api)',
   suggest: "The rule of thumb is any APIs that globally mutate Vue's behavior are now moved to the app instance. ",
-  website: 'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
+  website: 'https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp'
 }
 index: 2
 {
@@ -144,7 +144,7 @@ index: 2
   position: '[22,0]',
   name: 'remove Vue(global api)',
   suggest: "The rule of thumb is any APIs that globally mutate Vue's behavior are now moved to the app instance. ",
-  website: 'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
+  website: 'https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp'
 }
 index: 3
 {
@@ -152,7 +152,7 @@ index: 3
   position: '[5,41]',
   name: 'remove Vue(global api)',
   suggest: "The rule of thumb is any APIs that globally mutate Vue's behavior are now moved to the app instance. ",
-  website: 'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
+  website: 'https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp'
 }
 index: 4
 {
@@ -160,7 +160,7 @@ index: 4
   position: '[6,41]',
   name: 'remove Vue(global api)',
   suggest: "The rule of thumb is any APIs that globally mutate Vue's behavior are now moved to the app instance. ",
-  website: 'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
+  website: 'https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp'
 }
 index: 5
 {
@@ -168,7 +168,7 @@ index: 5
   position: '[4,4]',
   name: 'remove Vue(global api)',
   suggest: "The rule of thumb is any APIs that globally mutate Vue's behavior are now moved to the app instance. ",
-  website: 'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
+  website: 'https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp'
 }
 index: 6
 {
@@ -176,7 +176,7 @@ index: 6
   position: '[4,2]',
   name: 'remove Vue(global api)',
   suggest: "The rule of thumb is any APIs that globally mutate Vue's behavior are now moved to the app instance. ",
-  website: 'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
+  website: 'https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp'
 }
 index: 7
 {
@@ -184,7 +184,7 @@ index: 7
   position: '[9,2]',
   name: 'remove Vue(global api)',
   suggest: "The rule of thumb is any APIs that globally mutate Vue's behavior are now moved to the app instance. ",
-  website: 'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
+  website: 'https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp'
 }
 index: 8
 {

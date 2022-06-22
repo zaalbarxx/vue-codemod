@@ -49,7 +49,7 @@ Please refer to [Vue2ToVue3](https://github.com/zdravkov/Vue2ToVue3) to see the 
 
 ### Global API
 
-[Migration Guide from Vue.js team](https://v3.vuejs.org/guide/migration/global-api.html)
+[Migration Guide from Vue.js team](https://v3-migration.vuejs.org/breaking-changes/global-api.html)
 
 - Transform `Global API` to a plugin
 
@@ -128,7 +128,7 @@ Please refer to [Vue2ToVue3](https://github.com/zdravkov/Vue2ToVue3) to see the 
 
 ### Slot
 
-Please refer to [Migration Guide from Vue.js team](https://vuejs.org/v2/guide/components-slots.html#Deprecated-Syntax) for more details.
+Please refer to [Migration Guide from Vue.js team](https://v2.vuejs.org/v2/guide/components-slots.html#Deprecated-Syntax) for more details.
 
 `slot` attributes are deprecated since Vue 2.6.0. `v-slot` was introduced for named and scoped slots. In `vue-codemod` , the `slot-attribute` rule can transform `slot` attributes to `v-slot` syntax：
 
@@ -185,17 +185,17 @@ We need to manually put `v-if` and `v-else` into one `<template>` tag.
 
 #### Partial Filter
 
-Please refer to [Migration Guide from Vue.js team](https://v3.vuejs.org/guide/migration/filters.html) for more details.
+Please refer to [Migration Guide from Vue.js team](https://v3-migration.vuejs.org/breaking-changes/filters.html) for more details.
 
 #### Global Filter
 
-Please refer to [Migration Guide from Vue.js team](https://v3.vuejs.org/guide/migration/filters.html#global-filters) for more details.
+Please refer to [Migration Guide from Vue.js team](https://v3-migration.vuejs.org/breaking-changes/filters.html#global-filters) for more details.
 
 ### Events API
 
 In Vue 3, `$on`, `$off` and `$once` instance methods are removed. Component instances no longer implement the event emitter interface, thus it is no longer possible to use these APIs to listen to a component's own emitted events from within a component. The event bus pattern can be replaced by using an external library implementing the event emitter interface, for example [mitt](https://github.com/developit/mitt) or [tiny-emitter](https://github.com/scottcorgan/tiny-emitter).
 
-Please refer to [Migration Guide from Vue.js team](https://v3.vuejs.org/guide/migration/events-api.html) for more details.
+Please refer to [Migration Guide from Vue.js team](https://v3-migration.vuejs.org/breaking-changes/events-api.html) for more details.
 
 - Add `mitt` dependencies
 

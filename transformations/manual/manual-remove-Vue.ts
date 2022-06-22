@@ -19,7 +19,7 @@ export const transformAST: ASTTransformation = context => {
       const suggest =
         "The rule of thumb is any APIs that globally mutate Vue's behavior are now moved to the app instance."
       const website =
-        'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
+        'https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp'
       pushManualList(path, node, name, suggest, website)
     })
   }

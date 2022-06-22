@@ -35,7 +35,7 @@
 
 > `npm/yarn` install is recommended. Users can also try beta version from GitHub
 
-#### Install from `npm/yarn`  
+#### Install from `npm/yarn`
 
 ``` bash
 npm install @originjs/vue-codemod -g
@@ -81,7 +81,7 @@ npx vue-codemod <path> -t/-a [transformation params][...additional options]
 
 1. `<path>` indicates the path of execution, which can be files and folders
 2. `-a` means executing all rules.
-3. `-t` means executing one specific rule (Conflicts with `-a`). When `-t` is used, parameter is required. 
+3. `-t` means executing one specific rule (Conflicts with `-a`). When `-t` is used, parameter is required.
 
 #### Execute All Rules
 
@@ -156,7 +156,7 @@ index: 1
   position: '[33,0]',
   name: 'remove Vue(global api)',
   suggest: "The rule of thumb is any APIs that globally mutate Vue's behavior are now moved to the app instance.",
-  website: 'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
+  website: 'https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp'
 }
 ```
 
@@ -206,36 +206,36 @@ We forked [vue2-element-touzi-admin](https://github.com/wdlhao/vue2-element-touz
 
 | Rule Names                        | Descriptions or links                                        |
 | --------------------------------- | ------------------------------------------------------------ |
-| new-component-api                 | https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp |
+| new-component-api                 | https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp |
 | vue-class-component-v8            | https://github.com/vuejs/vue-class-component/issues/406      |
-| new-global-api                    | https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp |
+| new-global-api                    | https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp |
 | vue-router-v4                     | https://next.router.vuejs.org/guide/migration/index.html#new-router-becomes-createrouter<br>https://next.router.vuejs.org/guide/migration/index.html#new-history-option-to-replace-mode<br>https://next.router.vuejs.org/guide/migration/index.html#replaced-onready-with-isready |
 | vuex-v4                           | new Store (...) => createStore (...)                         |
 | define-component                  | Vue.extend (...) => defineComponent (...)                    |
-| new-vue-to-create-app             | https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp |
-| scoped-slots-to-slots             | https://v3.vuejs.org/guide/migration/slots-unification.html#overview |
-| new-directive-api                 | https://v3.vuejs.org/guide/migration/custom-directives.html#overview |
-| remove-vue-set-and-delete         | https://v3.vuejs.org/guide/migration/introduction.html#removed-apis |
-| rename-lifecycle                  | https://v3.vuejs.org/guide/migration/introduction.html#other-minor-changes |
-| add-emit-declaration              | https://v3.vuejs.org/guide/migration/emits-option.html#overview |
-| tree-shaking                      | https://v3.vuejs.org/guide/migration/global-api-treeshaking.html |
-| v-model                           | https://v3.vuejs.org/guide/migration/v-model.html#overview   |
-| render-to-resolveComponent        | https://v3.vuejs.org/guide/migration/render-function-api.html#registered-component |
-| remove-contextual-h-from-render   | https://v3.vuejs.org/guide/migration/render-function-api.html#render-function-argument |
-| remove-production-tip             | https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp |
+| new-vue-to-create-app             | https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp |
+| scoped-slots-to-slots             | https://v3-migration.vuejs.org/breaking-changes/slots-unification.html#overview |
+| new-directive-api                 | https://v3-migration.vuejs.org/breaking-changes/custom-directives.html#overview |
+| remove-vue-set-and-delete         | https://v3-migration.vuejs.org/breaking-changes/#removed-apis |
+| rename-lifecycle                  | https://v3-migration.vuejs.org/breaking-changes/#other-minor-changes |
+| add-emit-declaration              | https://v3-migration.vuejs.org/breaking-changes/emits-option.html |
+| tree-shaking                      | https://v3-migration.vuejs.org/breaking-changes/global-api-treeshaking.html |
+| v-model                           | https://v3-migration.vuejs.org/breaking-changes/v-model.html#overview   |
+| render-to-resolveComponent        | https://v3-migration.vuejs.org/breaking-changes/render-function-api.html#registered-component |
+| remove-contextual-h-from-render   | https://v3-migration.vuejs.org/breaking-changes/render-function-api.html#render-function-argument |
+| remove-production-tip             | https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp |
 | remove-trivial-root               | createApp ({ render: () => h (App) })  =>  createApp (App)   |
 | vue-as-namespace-import           | import Vue from "vue"  => import * as Vue from "vue"         |
-| slot-attribute                    | https://vuejs.org/v2/guide/components-slots.html#Deprecated-Syntax |
+| slot-attribute                    | https://v2.vuejs.org/v2/guide/components-slots.html#Deprecated-Syntax |
 | slot-default                      | If  component tag did not contain a `<slot>` element, any content provided between its opening and closing tag would be discarded. |
-| slot-scope-attribute              | https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots-with-the-slot-scope-Attribute |
-| v-for-template-key                | https://v3.vuejs.org/guide/migration/key-attribute.html#overview |
-| v-else-if-key                     | https://v3.vuejs.org/guide/migration/key-attribute.html#overview |
-| transition-group-root             | https://v3.vuejs.org/guide/migration/transition-group.html#overview |
-| v-bind-order-sensitive            | https://v3.vuejs.org/guide/migration/v-bind.html#overview    |
-| v-for-v-if-precedence-changed     | https://v3.vuejs.org/guide/migration/v-if-v-for.html#overview |
-| remove-listeners                  | https://v3.vuejs.org/guide/migration/listeners-removed.html#overview |
-| v-bind-sync                       | https://v3.vuejs.org/guide/migration/v-model.html#overview   |
-| remove-v-on-native                | https://v3.vuejs.org/guide/migration/v-on-native-modifier-removed.html#overview |
+| slot-scope-attribute              | https://v2.vuejs.org/v2/guide/components-slots.html#Scoped-Slots |
+| v-for-template-key                | https://v3-migration.vuejs.org/breaking-changes/key-attribute.html#with-template-v-for |
+| v-else-if-key                     | https://v3-migration.vuejs.org/breaking-changes/key-attribute.html#on-conditional-branches |
+| transition-group-root             | https://v3-migration.vuejs.org/breaking-changes/transition-group.html#overview |
+| v-bind-order-sensitive            | https://v3-migration.vuejs.org/breaking-changes/v-bind.html#overview    |
+| v-for-v-if-precedence-changed     | https://v3-migration.vuejs.org/breaking-changes/v-if-v-for.html#overview |
+| remove-listeners                  | https://v3-migration.vuejs.org/breaking-changes/listeners-removed.html#overview |
+| v-bind-sync                       | https://v3-migration.vuejs.org/breaking-changes/v-model.html#overview   |
+| remove-v-on-native                | https://v3-migration.vuejs.org/breaking-changes/v-on-native-modifier-removed.html#overview |
 | router-link-event-tag             | https://next.router.vuejs.org/guide/migration/index.html#removal-of-event-and-tag-props-in-router-link |
 | router-link-exact                 | https://next.router.vuejs.org/guide/migration/index.html#removal-of-the-exact-prop-in-router-link |
 | router-view-keep-alive-transition | https://next.router.vuejs.org/guide/migration/index.html#router-view-keep-alive-and-transition |
