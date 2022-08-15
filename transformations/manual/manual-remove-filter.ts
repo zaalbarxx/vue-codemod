@@ -17,7 +17,7 @@ export const transformAST: ASTTransformation = context => {
       const suggest =
         'Filters are removed from Vue 3.0 and no longer supported.'
       const website =
-        'https://v3.vuejs.org/guide/migration/filters.html#overview'
+        'https://v3-migration.vuejs.org/breaking-changes/filters.html#overview'
       pushManualList(path, node, name, suggest, website)
     })
   }
@@ -37,7 +37,7 @@ export const transformAST: ASTTransformation = context => {
       const suggest =
         'Instead, you can make your global filters available to all components through globalProperties: '
       const website =
-        'https://v3.vuejs.org/guide/migration/filters.html#global-filters'
+        'https://v3-migration.vuejs.org/breaking-changes/filters.html#global-filters'
       pushManualList(path, node, name, suggest, website)
     })
   }

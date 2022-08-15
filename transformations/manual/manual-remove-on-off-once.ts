@@ -20,7 +20,7 @@ export const transformAST: ASTTransformation = context => {
       const suggest =
         '$on, $off and $once instance methods are removed. Component instances no longer implement the event emitter interface.'
       const website =
-        'https://v3.vuejs.org/guide/migration/events-api.html#overview'
+        'https://v3-migration.vuejs.org/breaking-changes/events-api.html#overview'
       pushManualList(path, node, name, suggest, website)
     })
   }

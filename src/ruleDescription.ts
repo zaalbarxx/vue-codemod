@@ -1,14 +1,14 @@
 export let ruleDescription = {
   'new-component-api': {
     description:
-      'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
+      'https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp'
   },
   'vue-class-component-v8': {
     description: 'https://github.com/vuejs/vue-class-component/issues/406'
   },
   'new-global-api': {
     description:
-      'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
+      'https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp'
   },
   'vue-router-v4': {
     description: [
@@ -25,46 +25,46 @@ export let ruleDescription = {
   },
   'new-vue-to-create-app': {
     description:
-      'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
+      'https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp'
   },
   'scoped-slots-to-slots': {
     description:
-      'https://v3.vuejs.org/guide/migration/slots-unification.html#overview'
+      'https://v3-migration.vuejs.org/breaking-changes/slots-unification.html#overview'
   },
   'new-directive-api': {
     description:
-      'https://v3.vuejs.org/guide/migration/custom-directives.html#overview'
+      'https://v3-migration.vuejs.org/breaking-changes/custom-directives.html#overview'
   },
   'remove-vue-set-and-delete': {
     description:
-      'https://v3.vuejs.org/guide/migration/introduction.html#removed-apis'
+      'https://v3-migration.vuejs.org/breaking-changes/#removed-apis'
   },
   'rename-lifecycle': {
     description:
-      'https://v3.vuejs.org/guide/migration/introduction.html#other-minor-changes'
+      'https://v3-migration.vuejs.org/breaking-changes/#other-minor-changes'
   },
   'add-emit-declaration': {
     description:
-      'https://v3.vuejs.org/guide/migration/emits-option.html#overview'
+      'https://v3-migration.vuejs.org/breaking-changes/emits-option.html'
   },
   'tree-shaking': {
     description:
-      'https://v3.vuejs.org/guide/migration/global-api-treeshaking.html'
+      'https://v3-migration.vuejs.org/breaking-changes/global-api-treeshaking.html'
   },
   'v-model': {
-    description: 'https://v3.vuejs.org/guide/migration/v-model.html#overview'
+    description: 'https://v3-migration.vuejs.org/breaking-changes/v-model.html#overview'
   },
   'render-to-resolveComponent': {
     description:
-      'https://v3.vuejs.org/guide/migration/render-function-api.html#registered-component'
+      'https://v3-migration.vuejs.org/breaking-changes/render-function-api.html#registered-component'
   },
   'remove-contextual-h-from-render': {
     description:
-      'https://v3.vuejs.org/guide/migration/render-function-api.html#render-function-argument'
+      'https://v3-migration.vuejs.org/breaking-changes/render-function-api.html#render-function-argument'
   },
   'remove-production-tip': {
     description:
-      'https://v3.vuejs.org/guide/migration/global-api.html#a-new-global-api-createapp'
+      'https://v3-migration.vuejs.org/breaking-changes/global-api.html#a-new-global-api-createapp'
   },
   'remove-trivial-root': {
     description: 'createApp ({ render: () => h (App) }) => createApp (App)'
@@ -74,7 +74,7 @@ export let ruleDescription = {
   },
   'slot-attribute': {
     description:
-      'https://vuejs.org/v2/guide/components-slots.html#Deprecated-Syntax'
+      'https://v2.vuejs.org/v2/guide/components-slots.html#Deprecated-Syntax'
   },
   'slot-default': {
     description:
@@ -82,36 +82,36 @@ export let ruleDescription = {
   },
   'slot-scope-attribute': {
     description:
-      'https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots-with-the-slot-scope-Attribute'
+      'https://v2.vuejs.org/v2/guide/components-slots.html#Scoped-Slots'
   },
   'v-for-template-key': {
     description:
-      'https://v3.vuejs.org/guide/migration/key-attribute.html#overview'
+      'https://v3-migration.vuejs.org/breaking-changes/key-attribute.html#with-template-v-for'
   },
   'v-else-if-key': {
     description:
-      'https://v3.vuejs.org/guide/migration/key-attribute.html#overview'
+      'https://v3-migration.vuejs.org/breaking-changes/key-attribute.html#on-conditional-branches'
   },
   'transition-group-root': {
     description:
-      'https://v3.vuejs.org/guide/migration/transition-group.html#overview'
+      'https://v3-migration.vuejs.org/breaking-changes/transition-group.html#overview'
   },
   'v-bind-order-sensitive': {
-    description: 'https://v3.vuejs.org/guide/migration/v-bind.html#overview'
+    description: 'https://v3-migration.vuejs.org/breaking-changes/v-bind.html#overview'
   },
   'v-for-v-if-precedence-changed': {
-    description: 'https://v3.vuejs.org/guide/migration/v-if-v-for.html#overview'
+    description: 'https://v3-migration.vuejs.org/breaking-changes/v-if-v-for.html#overview'
   },
   'remove-listeners': {
     description:
-      'https://v3.vuejs.org/guide/migration/listeners-removed.html#overview'
+      'https://v3-migration.vuejs.org/breaking-changes/listeners-removed.html#overview'
   },
   'v-bind-sync': {
-    description: 'https://v3.vuejs.org/guide/migration/v-model.html#overview'
+    description: 'https://v3-migration.vuejs.org/breaking-changes/v-model.html#overview'
   },
   'remove-v-on-native': {
     description:
-      'https://v3.vuejs.org/guide/migration/v-on-native-modifier-removed.html#overview'
+      'https://v3-migration.vuejs.org/breaking-changes/v-on-native-modifier-removed.html#overview'
   },
   'router-link-event-tag': {
     description:

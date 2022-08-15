@@ -43,7 +43,7 @@ function findNodes(context: any) {
     const suggest =
       'For those using keyCode in their codebase, we recommend converting them to their kebab-cased named equivalents.'
     const website =
-      'https://v3.vuejs.org/guide/migration/keycode-modifiers.html'
+      'https://v3-migration.vuejs.org/breaking-changes/keycode-modifiers.html'
     VuePushManualList(path, node, name, suggest, website)
   })
 }
