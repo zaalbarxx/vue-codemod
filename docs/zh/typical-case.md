@@ -20,10 +20,10 @@ Vue 3 正式版本发布已经半年有余，同时 Vue 2 会逐步停止维护�
 
 > 注意：vue-codemod 是在源路径下修改文件，若您的代码没有使用诸如 Git、SVN 等版本管理工具时，请提前备份。
 
-运行命令：`npx vue-codemod src -a`，在手动修改前直接使用 vue-codemod 来一波自动升级（实际是语法替换），下面是转换日志，我们可以看到转换了哪些规则，更改了哪些文件；
+运行命令：`vue-codemod src -a`，在手动修改前直接使用 vue-codemod 来一波自动升级（实际是语法替换），下面是转换日志，我们可以看到转换了哪些规则，更改了哪些文件；
 
 ```cmd
-npx vue-codemod src -a
+vue-codemod src -a
 Warning!!
 This tool may overwrite files.
 press enter or enter yes or enter Y to continue:

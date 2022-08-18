@@ -25,13 +25,13 @@ yarn add originjs/vue-codemod -g
 Command：
 
 ```bash
-npx vue-codemod src -a
+vue-codemod src -a
 ```
 
 First we apply `vue-codemod` to auto upgrade the source code. Hers is the transformation log. Users can figure out which rules was executed and which files are modified.
 
 ```cmd
-npx vue-codemod src -a
+vue-codemod src -a
 Warning!!
 This tool may overwrite files.
 press enter or enter yes or enter Y to continue:

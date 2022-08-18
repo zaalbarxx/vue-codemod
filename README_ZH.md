@@ -74,7 +74,7 @@ yarn global add .
 `vue-codemod` 是由一条条转换规则组成，这些转换规则位于 `transformation/index.ts` 和 `vue-transformation/index.ts` 下。
 
 ```bash
-npx vue-codemod <path> -t/-a [transformation params][...additional options]
+vue-codemod <path> -t/-a [transformation params][...additional options]
 ```
 
 1. `<path>` 表示执行的路径，可以是文件和文件夹
@@ -83,7 +83,7 @@ npx vue-codemod <path> -t/-a [transformation params][...additional options]
 #### 执行所有规则
 
 ```bash
-npx vue-codemod src -a
+vue-codemod src -a
 ```
 
 `src` 指定的是扫描的文件路径，`-a` 表示执行所有的规则转换
@@ -91,7 +91,7 @@ npx vue-codemod src -a
 #### 执行单条规则
 
 ```bash
-npx vue-codemod src -t new-global-api
+vue-codemod src -t new-global-api
 ```
 
 `src` 指定的是扫描的文件路径，`-t new-global-api` 表示只执行 `new-global-api` 这条规则。
@@ -101,7 +101,7 @@ npx vue-codemod src -t new-global-api
 #### 规定输出格式
 
 ```bash
-npx vue-codemod src -a -f log
+vue-codemod src -a -f log
 ```
 
 `-f` 命令用于规定统计输出格式，可选参数为为 `table`、`detail` 、`log`，在没有指定参数的情况下默认为 `table`。
@@ -154,13 +154,13 @@ index: 1
 #### 帮助
 
 ```bash
-npx vue-codemod --help
+vue-codemod --help
 ```
 
 结果如下所示
 
 ```bash
-npx vue-codemod --help
+vue-codemod --help
 Usage: vue-codemod [file pattern]
 
 Options:
@@ -173,16 +173,16 @@ Options:
   -v, --version               Show version number                      [boolean]
 
 Examples:
-  npx vue-codemod ./src -a                  Run all rules to convert all
+  vue-codemod ./src -a                  Run all rules to convert all
                                             relevant files in the ./src folder
-  npx vue-codemod                           Run slot-attribute rule to convert
+  vue-codemod                           Run slot-attribute rule to convert
   ./src/components/HelloWorld.vue -t        HelloWorld.vue
   slot-attribute
 ```
 
 ### 迁移步骤
 
-1. 运行 `vue-codemod` 的 `-a` 命令: `npx vue-codemod <path> -a`
+1. 运行 `vue-codemod` 的 `-a` 命令: `vue-codemod <path> -a`
 2. 手动迁移 `vue-codemod` 没有覆盖到的特殊场景， 请参考 [手动迁移指南](./docs/zh/manual-guide.md).
 3. 确保使用 [@vue/compat](https://github.com/vuejs/vue-next/tree/master/packages/vue-compat) 兼容包运行
 4. 在开发模式下启动项目，修复运行时告警

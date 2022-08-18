@@ -76,7 +76,7 @@ yarn global add .
 `vue-codemod` consists of different migration rules. Those rules are defined in `transformation/index.ts` and  `vue-transformation/index.ts`.
 
 ``` bash
-npx vue-codemod <path> -t/-a [transformation params][...additional options]
+vue-codemod <path> -t/-a [transformation params][...additional options]
 ```
 
 1. `<path>` indicates the path of execution, which can be files and folders
@@ -86,7 +86,7 @@ npx vue-codemod <path> -t/-a [transformation params][...additional options]
 #### Execute All Rules
 
 ``` bash
-npx vue-codemod src -a
+vue-codemod src -a
 ```
 
 `src` indicates the path of execution. `-a` means executing all rules.
@@ -94,7 +94,7 @@ npx vue-codemod src -a
 #### Execute Specific Rule
 
 ```bash
-npx vue-codemod src -t new-global-api
+vue-codemod src -t new-global-api
 ```
 
 `src` indicates the path of execution. `-t new-global-api` means only executing the rule of `new-global-api` .
@@ -104,7 +104,7 @@ npx vue-codemod src -t new-global-api
 #### Output Format
 
 ```bash
-npx vue-codemod src -a -f log
+vue-codemod src -a -f log
 ```
 
 The `-f` option is used to specify the output format. The optional parameters are `table`, `detail`,`log`. If no parameters are specified, the default is `table`.
@@ -163,13 +163,13 @@ index: 1
 #### Help
 
 ```bash
-npx vue-codemod --help
+vue-codemod --help
 ```
 
 Output:
 
 ``` bash
-npx vue-codemod --help
+vue-codemod --help
 Usage: vue-codemod [file pattern]
 
 Options:
@@ -182,16 +182,16 @@ Options:
   -v, --version               Show version number                      [boolean]
 
 Examples:
-  npx vue-codemod ./src -a                  Run all rules to convert all
+  vue-codemod ./src -a                  Run all rules to convert all
                                             relevant files in the ./src folder
-  npx vue-codemod                           Run slot-attribute rule to convert
+  vue-codemod                           Run slot-attribute rule to convert
   ./src/components/HelloWorld.vue -t        HelloWorld.vue
   slot-attribute
 ```
 
 ### Migrating from Vue 2 to Vue 3
 
-1. Run the `-a` command: `npx vue-codemod <path> -a`
+1. Run the `-a` command: `vue-codemod <path> -a`
 2. Manually migrate some cases which `vue-codemod` doesn't cover based on [Manual Migration Guide](./docs/manual-guide.md).
 3. Make sure to use [@vue/compat](https://github.com/vuejs/vue-next/tree/master/packages/vue-compat) to build
 4. Serve the app in development mode, fix the runtime deprecation warnings

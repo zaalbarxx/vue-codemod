@@ -57,11 +57,11 @@ const {
   })
   .example([
     [
-      'npx vue-codemod ./src -a',
+      'vue-codemod ./src -a',
       'Run all rules to convert all relevant files in the ./src folder'
     ],
     [
-      'npx vue-codemod ./src/components/HelloWorld.vue -t slot-attribute',
+      'vue-codemod ./src/components/HelloWorld.vue -t slot-attribute',
       'Run slot-attribute rule to convert HelloWorld.vue'
     ]
   ])
