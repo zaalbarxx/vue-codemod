@@ -1,10 +1,26 @@
-import type { JSCodeshift, Transform, Core } from 'jscodeshift'
+import type { JSCodeshift, Core } from 'jscodeshift'
 import { cliInstance } from './report'
+import * as templateParser from 'vue-eslint-parser'
+import {Node} from "vue-eslint-parser/ast/nodes";
+
+interface FileInfo {
+  /** The absolute path to the current file. */
+  path: string
+  /** The source code of the current file. */
+  source: string
+  templateSource?: any;
+}
+
+export interface AstTransform {
+  (file: FileInfo, api: any, options: any): string | null | undefined | void
+  type: string
+}
 
 export type Context = {
   root: ReturnType<Core>
   j: JSCodeshift
-  filename: string
+  filename: string,
+  templateRoot?: Node
 }
 
 export type ASTTransformation<Params = void> = {
@@ -14,9 +30,10 @@ export type ASTTransformation<Params = void> = {
 global.subRules = {}
 
 export default function astTransformationToJSCodeshiftModule<Params = any>(
-  transformAST: ASTTransformation<Params>
-): Transform {
-  const transform: Transform = (file, api, options: Params) => {
+  transformAST: ASTTransformation<Params>,
+  withTemplateAST = false
+): AstTransform {
+  const transform: AstTransform = (file, api, options: Params) => {
     const j = api.jscodeshift
     let root
     try {
@@ -30,10 +47,21 @@ export default function astTransformationToJSCodeshiftModule<Params = any>(
       return
     }
 
-    transformAST({ root, j, filename: file.path }, options)
+    const parseTemplateAST = () => {
+      const source = file.templateSource
+      const options = { sourceType: 'module' }
+      const ast = templateParser.parse(source, options)
+      let root: Node = <Node>ast.templateBody
+      return root;
+    }
+
+    transformAST({ root, j, filename: file.path, templateRoot: withTemplateAST && file.templateSource ? parseTemplateAST() : undefined }, options)
 
     return root.toSource({ lineTerminator: '\n' })
   }
 
+  if (withTemplateAST) {
+    transform.type = 'jsWithVueTemplate';
+  }
   return transform
 }

@@ -26,6 +26,7 @@ const transformationMap: {
   'vue-i18n-v9': require('./vue-i18n-v9'),
   'vuex-create-logger': require('./vuex-create-logger'),
   'element-plus-import': require('./element-plus-upgrade'),
+  'define-async-component': require('./define-async-component'),
 
   // atomic ones
   'remove-contextual-h-from-render': require('./remove-contextual-h-from-render'),

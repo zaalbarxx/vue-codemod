@@ -12,7 +12,8 @@ const debug = createDebug('vue-codemod:run')
 
 type FileInfo = {
   path: string
-  source: string
+  source: string,
+  templateSource?: any;
 }
 
 type JSTransformation = Transform & {
@@ -58,28 +59,21 @@ export default function runTransformation(
   let descriptor: SFCDescriptor
 
   if (transformation.type === 'vueTransformation') {
-    if (extension === '.vue') {
-      descriptor = parseSFC(source, { filename: path }).descriptor
-    } else {
-      // skip non .vue files
-      return source
+    const parseResult = parseTemplate({ path, source, extension });
+
+    if (!parseResult) {
+      return source;
     }
 
-    // skip .vue files without template block
+    const { contentStart, contentEnd, astStart, astEnd, descriptor } = parseResult;
+
     if (!descriptor.template) {
       debug('skip .vue files without template block.')
       return source
     }
-    let contentStart: number =
-      descriptor.template.ast.children[0].loc.start.offset
-    let contentEnd: number =
-      descriptor.template.ast.children[
-        descriptor.template.ast.children.length - 1
-      ].loc.end.offset + 1
-    let astStart = descriptor.template.ast.loc.start.offset
-    let astEnd = descriptor.template.ast.loc.end.offset + 1
 
-    fileInfo.source = descriptor.template.ast.loc.source
+
+    fileInfo.source = descriptor.template.ast.loc.source;
 
     const out = transformation(fileInfo, params)
 
@@ -117,6 +111,9 @@ export default function runTransformation(
 
       lang = descriptor.script.lang || 'js'
       fileInfo.source = descriptor.script.content
+      if (transformation.type === 'jsWithVueTemplate') {
+        fileInfo.templateSource = descriptor.template?.ast.loc.source;
+      }
     }
 
     let parser = getParser()
@@ -160,4 +157,32 @@ export default function runTransformation(
 
     return out
   }
+}
+
+const parseTemplate = ({ source, extension, path }: { source: any, extension: string, path: string}):
+  {contentStart: number, contentEnd: number, astStart: number, astEnd:number, descriptor: SFCDescriptor } | null => {
+  let descriptor;
+
+  if (extension === '.vue') {
+    descriptor = parseSFC(source, { filename: path }).descriptor
+  } else {
+    // skip non .vue files
+    return null;
+  }
+
+  // skip .vue files without template block
+  if (!descriptor.template) {
+    debug('skip .vue files without template block.')
+    return null;
+  }
+  let contentStart: number =
+    descriptor.template.ast.children[0].loc.start.offset
+  let contentEnd: number =
+    descriptor.template.ast.children[
+    descriptor.template.ast.children.length - 1
+      ].loc.end.offset + 1
+  let astStart = descriptor.template.ast.loc.start.offset
+  let astEnd = descriptor.template.ast.loc.end.offset + 1
+
+  return { contentStart, contentEnd, astStart, astEnd, descriptor };
 }
