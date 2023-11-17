@@ -31,7 +31,8 @@ const transformationMap: {
   'remove-row-type-flex': require('./element-ui/remove-row-type-flex'),
 
   // manual (must be used at the end of list)
-  'manual-remove-keycode': require('./manual/manual-remove-keycode')
+  'manual-remove-keycode': require('./manual/manual-remove-keycode'),
+  'vee-validate': require('./vee-validate')
 }
 
 export const excludedVueTransformations = ['v-bind-order-sensitive']

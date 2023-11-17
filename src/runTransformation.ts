@@ -6,8 +6,8 @@ import { parse as parseSFC, stringify as stringifySFC } from './sfcUtils'
 import type { SFCDescriptor } from './sfcUtils'
 
 import VueTransformation from './VueTransformation'
-import {parseTemplate} from "./parseTemplate";
-import {debug} from "./debug";
+import { parseTemplate } from './parseTemplate'
+import { debug } from './debug'
 
 type FileInfo = {
   path: string
@@ -33,16 +33,31 @@ type VueTransformationModule =
       default: VueTransformation
     }
 
+type VueJsAndTemplateTransformation = {
+  (
+    fileInfos: { template: FileInfo; js: FileInfo },
+    options: any
+  ): {
+    script: string | null | undefined | void
+    template: string | null | undefined | void
+  }
+  type: 'vueJsAndTemplateTransformation'
+}
+
 export type TransformationModule =
   | JSTransformationModule
   | VueTransformationModule
 
+type Transformation =
+  | VueTransformation
+  | JSTransformation
+  | VueJsAndTemplateTransformation
 export default function runTransformation(
   fileInfo: FileInfo,
   transformationModule: TransformationModule,
   params: object = {}
 ) {
-  let transformation: VueTransformation | JSTransformation
+  let transformation: Transformation
   // @ts-ignore
   if (typeof transformationModule.default !== 'undefined') {
     // @ts-ignore
@@ -57,7 +72,64 @@ export default function runTransformation(
   let lang = extension.slice(1)
   let descriptor: SFCDescriptor
 
-  if (transformation.type === 'vueTransformation') {
+  const isVueTemplateAndJsTransformation = (
+    transformation: Transformation
+  ): transformation is VueJsAndTemplateTransformation =>
+    transformation.type === 'vueJsAndTemplateTransformation'
+
+  if (isVueTemplateAndJsTransformation(transformation)) {
+    const parseResult = parseTemplate({ path, source, extension })
+    if (!parseResult) {
+      return source
+    }
+
+    const { contentStart, contentEnd, astStart, astEnd, descriptor } =
+      parseResult
+
+    global.scriptLine = descriptor.script?.loc.start.line ?? 0
+
+    lang = descriptor.script?.lang || 'js'
+
+    const fileInfos = {
+      template: {
+        ...fileInfo,
+        source: descriptor.template?.ast.loc.source ?? ''
+      },
+      js: {
+        ...fileInfo,
+        lang: descriptor.script?.lang || 'js',
+        source: descriptor.script?.content ?? ''
+      }
+    }
+
+    const jsApi = getJSCodeshiftAPI(transformationModule, lang)
+    const { script, template } = transformation(fileInfos, { ...params, ...jsApi })
+
+    if (!script && template) {
+      return source
+    }
+
+    // need to reconstruct the .vue file from descriptor blocks
+    if (extension === '.vue') {
+      if (template === descriptor!.template!.content && script === descriptor!.script!.content) {
+        return source // skipped, don't bother re-stringifying
+      }
+
+      if (template && template !== descriptor!.template!.content) {
+        descriptor!.template!.content = template.slice(
+          contentStart - astStart,
+          contentEnd - astEnd
+        )
+      }
+      if (script && script !== descriptor!.script!.content) {
+        descriptor!.script!.content = script;
+      }
+
+      return stringifySFC(descriptor!)
+    }
+
+    return source
+  } else if (transformation.type === 'vueTransformation') {
     const parseResult = parseTemplate({ path, source, extension })
 
     if (!parseResult) {

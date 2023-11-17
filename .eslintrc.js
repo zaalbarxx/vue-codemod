@@ -16,9 +16,7 @@ module.exports = {
     // since we target ES2015 for baseline support, we need to forbid object
     // rest spread usage (both assign and destructure)
     'no-restricted-syntax': [
-      'error',
-      'ObjectExpression > SpreadElement',
-      'ObjectPattern > RestElement'
+      'error'
     ]
   },
   overrides: [
