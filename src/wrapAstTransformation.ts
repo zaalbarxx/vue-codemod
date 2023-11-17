@@ -55,9 +55,14 @@ export default function astTransformationToJSCodeshiftModule<Params = any>(
       return root;
     }
 
-    transformAST({ root, j, filename: file.path, templateRoot: withTemplateAST && file.templateSource ? parseTemplateAST() : undefined }, options)
+    try {
+      transformAST({ root, j, filename: file.path, templateRoot: withTemplateAST && file.templateSource ? parseTemplateAST() : undefined }, options)
+    } catch (error) {
+      console.error(`Failed to transform ${file.path}`);
+      throw error;
+    }
 
-    return root.toSource({ lineTerminator: '\n' })
+    return root.toSource()
   }
 
   if (withTemplateAST) {

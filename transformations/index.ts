@@ -55,7 +55,9 @@ const transformationMap: {
   'manual-remove-on-off-once': require('./manual/manual-remove-on-off-once'),
   'manual-remove-router-star': require('./manual/manual-remove-router-star'),
   'manual-remove-config-keycodes': require('./manual/manual-remove-config-keycodes'),
-  'manual-remove-filter': require('./manual/manual-remove-filter')
+  'manual-remove-filter': require('./manual/manual-remove-filter'),
+
+  'table-manager': require('./table-manager')
 }
 
 export const excludedTransformations = [
