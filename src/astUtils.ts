@@ -9,7 +9,8 @@ import type {
   Expression,
   ObjectExpression,
   FunctionExpression,
-  ArrowFunctionExpression
+  ArrowFunctionExpression,
+  ArrayExpression
 } from 'jscodeshift'
 import type { Context } from './wrapAstTransformation'
 
@@ -371,4 +372,52 @@ export function getVueOptions(context: Context): Collection<VueOptionsType> {
   }
 
   return j(paths)
+}
+
+export const getComponentPropNames = (
+  vueOptions: Collection<VueOptionsType>
+) => {
+  if (vueOptions.nodes()[0]?.type !== 'ObjectExpression') {
+    return []
+  }
+
+  const vueOptionsProperties = (vueOptions.nodes()[0] as ObjectExpression)
+    .properties;
+
+  const propsProperty = vueOptionsProperties.find(
+    property =>
+      (property.type === 'ObjectProperty' || property.type === 'Property') &&
+      property.key.type === 'Identifier' &&
+      property.key.name === 'props' &&
+      property.value.type === 'ObjectExpression'
+  )
+
+  return (
+    ((propsProperty as any)?.value as ObjectExpression).properties
+      .map((property: any) => property.key.name)
+      .flat() ?? []
+  )
+}
+
+export const getComponentEmits = (vueOptions: Collection<VueOptionsType>) => {
+  if (vueOptions.nodes()[0]?.type !== 'ObjectExpression') {
+    return []
+  }
+
+  const vueOptionsProperties = (vueOptions.nodes()[0] as ObjectExpression)
+    .properties;
+
+  const emitsProperty = vueOptionsProperties.find(
+    property =>
+      (property.type === 'ObjectProperty' || property.type === 'Property') &&
+      property.key.type === 'Identifier' &&
+      property.key.name === 'props' &&
+      property.value.type === 'ArrayExpression'
+  );
+
+  if (!emitsProperty) {
+    return [];
+  }
+
+  return (emitsProperty as any as ArrayExpression).elements.map((element: any) => element.value);
 }

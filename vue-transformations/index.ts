@@ -7,6 +7,7 @@ type VueTransformationModule = {
 const transformationMap: {
   [name: string]: VueTransformationModule
 } = {
+  'custom-inputs-value-and-events': require('./custom-inputs-value-and-events'),
   'slot-attribute': require('./slot-attribute'),
   'slot-default': require('./slot-default'),
   'slot-scope-attribute': require('./slot-scope-attribute'),

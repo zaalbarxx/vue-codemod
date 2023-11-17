@@ -1,19 +1,18 @@
 import jscodeshift, { Transform, Parser } from 'jscodeshift'
 // @ts-ignore
 import getParser from 'jscodeshift/src/getParser'
-import createDebug from 'debug'
 
 import { parse as parseSFC, stringify as stringifySFC } from './sfcUtils'
 import type { SFCDescriptor } from './sfcUtils'
 
 import VueTransformation from './VueTransformation'
-
-const debug = createDebug('vue-codemod:run')
+import {parseTemplate} from "./parseTemplate";
+import {debug} from "./debug";
 
 type FileInfo = {
   path: string
-  source: string,
-  templateSource?: any;
+  source: string
+  templateSource?: any
 }
 
 type JSTransformation = Transform & {
@@ -59,23 +58,31 @@ export default function runTransformation(
   let descriptor: SFCDescriptor
 
   if (transformation.type === 'vueTransformation') {
-    const parseResult = parseTemplate({ path, source, extension });
+    const parseResult = parseTemplate({ path, source, extension })
 
     if (!parseResult) {
-      return source;
+      return source
     }
 
-    const { contentStart, contentEnd, astStart, astEnd, descriptor } = parseResult;
+    const { contentStart, contentEnd, astStart, astEnd, descriptor } =
+      parseResult
 
     if (!descriptor.template) {
       debug('skip .vue files without template block.')
       return source
     }
 
+    fileInfo.source = descriptor.template.ast.loc.source
 
-    fileInfo.source = descriptor.template.ast.loc.source;
-
-    const out = transformation(fileInfo, params)
+    const api = getJSCodeshiftAPI(transformationModule, lang)
+    const JSFileInfo = {
+      // eslint-disable-next-line no-restricted-syntax
+      ...fileInfo,
+      lang: descriptor.script?.lang || 'js',
+      source: descriptor.script?.content ?? ''
+    }
+    // eslint-disable-next-line no-restricted-syntax
+    const out = transformation(fileInfo, { ...params, JSAPI: api, JSFileInfo })
 
     if (!out) {
       return source
@@ -112,33 +119,11 @@ export default function runTransformation(
       lang = descriptor.script.lang || 'js'
       fileInfo.source = descriptor.script.content
       if (transformation.type === 'jsWithVueTemplate') {
-        fileInfo.templateSource = descriptor.template?.ast.loc.source;
+        fileInfo.templateSource = descriptor.template?.ast.loc.source
       }
     }
 
-    let parser = getParser()
-    let parserOption = (transformationModule as JSTransformationModule).parser
-    // force inject `parser` option for .tsx? files, unless the module specifies a custom implementation
-    if (typeof parserOption !== 'object') {
-      if (lang.startsWith('ts')) {
-        parserOption = lang
-      }
-    }
-
-    if (parserOption) {
-      parser =
-        typeof parserOption === 'string'
-          ? getParser(parserOption)
-          : parserOption
-    }
-
-    const j = jscodeshift.withParser(parser)
-    const api = {
-      j,
-      jscodeshift: j,
-      stats: () => {},
-      report: () => {}
-    }
+    const api = getJSCodeshiftAPI(transformationModule, lang)
 
     const out = transformation(fileInfo, api, params)
     if (!out) {
@@ -159,30 +144,28 @@ export default function runTransformation(
   }
 }
 
-const parseTemplate = ({ source, extension, path }: { source: any, extension: string, path: string}):
-  {contentStart: number, contentEnd: number, astStart: number, astEnd:number, descriptor: SFCDescriptor } | null => {
-  let descriptor;
-
-  if (extension === '.vue') {
-    descriptor = parseSFC(source, { filename: path }).descriptor
-  } else {
-    // skip non .vue files
-    return null;
+const getJSCodeshiftAPI = (transformationModule: any, lang: string) => {
+  let parser = getParser()
+  let parserOption = (transformationModule as JSTransformationModule).parser
+  // force inject `parser` option for .tsx? files, unless the module specifies a custom implementation
+  if (typeof parserOption !== 'object') {
+    if (lang.startsWith('ts')) {
+      parserOption = lang
+    }
   }
 
-  // skip .vue files without template block
-  if (!descriptor.template) {
-    debug('skip .vue files without template block.')
-    return null;
+  if (parserOption) {
+    parser =
+      typeof parserOption === 'string' ? getParser(parserOption) : parserOption
   }
-  let contentStart: number =
-    descriptor.template.ast.children[0].loc.start.offset
-  let contentEnd: number =
-    descriptor.template.ast.children[
-    descriptor.template.ast.children.length - 1
-      ].loc.end.offset + 1
-  let astStart = descriptor.template.ast.loc.start.offset
-  let astEnd = descriptor.template.ast.loc.end.offset + 1
 
-  return { contentStart, contentEnd, astStart, astEnd, descriptor };
+  const j = jscodeshift.withParser(parser)
+  const api = {
+    j,
+    jscodeshift: j,
+    stats: () => {},
+    report: () => {}
+  }
+
+  return api
 }

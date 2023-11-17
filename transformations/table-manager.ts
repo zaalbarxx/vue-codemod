@@ -1,6 +1,6 @@
 import wrap from '../src/wrapAstTransformation'
 import type { ASTTransformation } from '../src/wrapAstTransformation'
-import { getVueOptions } from '../src/astUtils'
+import {getComponentPropNames, getVueOptions} from '../src/astUtils'
 import {
   BlockStatement,
   Collection,
@@ -81,19 +81,8 @@ export const transformAST: ASTTransformation<Params | undefined> = context => {
   const vueMethods = vueOptions.find(j.ObjectProperty, {
     key: { name: 'methods' }
   })
-  const vueOptionsProperties = vueOptions.nodes()[0]?.properties
-  const propsProperty = vueOptionsProperties.find(
-    property =>
-      property.type === 'ObjectProperty' &&
-      property.key.type === 'Identifier' &&
-      property.key.name === 'props' &&
-      property.value.type === 'ObjectExpression'
-  )
 
-  const componentPropNames =
-    ((propsProperty as any)?.value as ObjectExpression).properties
-      .map((property: any) => property.key.name)
-      .flat() ?? []
+  const componentPropNames = getComponentPropNames(vueOptions);
 
   tableManagerUsage.forEach(path => {
     const configuration = path.value.arguments

@@ -3,6 +3,7 @@ import type VueTransformation from './VueTransformation'
 import { Node } from 'vue-eslint-parser/ast/nodes'
 import * as parser from 'vue-eslint-parser'
 import { getCntFunc } from './report'
+import { API } from 'jscodeshift'
 
 const BOM = '\uFEFF'
 
@@ -20,9 +21,15 @@ export type VueASTTransformation<Params = void> = {
   type?: string
 }
 
+export type VueASTFix = (
+  node: Node,
+  source: string,
+  jsContext: { JSAPI: API; file: FileInfo }
+) => Operation[]
+
 export function createTransformAST(
   nodeFilter: (node: Node) => boolean,
-  fix: (node: Node, source?: string) => Operation[],
+  fix: VueASTFix,
   ruleName: string
 ) {
   function findNodes(context: any): Node[] {
@@ -45,14 +52,17 @@ export function createTransformAST(
     return toFixNodes
   }
 
-  const transformAST: VueASTTransformation = context => {
+  const transformAST: VueASTTransformation<any> = (context, params) => {
     const cntFunc = getCntFunc(ruleName, global.outputReport)
     let fixOperations: Operation[] = []
     const { file } = context
     const source = file.source
     const toFixNodes: Node[] = findNodes(context)
     toFixNodes.forEach(node => {
-      const operations = fix(node, source)
+      const operations = fix(node, source, {
+        JSAPI: params.JSAPI,
+        file: params.JSFileInfo
+      })
       if (operations.length) {
         cntFunc()
         fixOperations = fixOperations.concat(operations)
